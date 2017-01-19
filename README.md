@@ -47,17 +47,62 @@ se tedy o omezení scope pro definované proměnné. Následují tři `stage`, t
 jednotlivé po sobě jdoucí kroky v pipeline. Jenkins nabízí širokou škálu příkazů
 (nazývané steps), které lze nalézt v [dokumentaci](https://jenkins.io/doc/pipeline/steps/).
 
-![alt text](img/pipeline_history.png "Pipeline historie")
-Základní pohled na pipeline nabízí přehled historie buildů.
+![Základní pohled na pipeline nabízí přehled historie buildů](img/pipeline_history.png "Pipeline historie")
 
 Konfigurační soubor lze uchovávat přímo v repozitáři a Jenkins na něj odkázat, nebo
 jej vepsat přímo v grafickém rozhraní v nastavení pipeline. 
 
-![alt text](img/settings_general.png "Nastavení pipeline")
+![Nastavení pipeline](img/settings_general.png "Nastavení pipeline")
 
 V nastavení pipeline jdou dále specifikovat tzv. _Build Triggers_, tedy události, kdy se
 má pipeline spouštět. Lze nastavit, že se pipeline bude provádět s nějakou periodicitou,
 nebo například Github webhook (Jenkins pozná, že do určité větve v repozitáři byl 
 pushnut nový commit).
 
-![alt text](img/settings_triggers.png "Pipeline triggers")
+![Pipeline triggery](img/settings_triggers.png "Pipeline triggers")
+
+## Ukázková pipeline
+
+Jednoduchá _Hello World_ aplikace napsaná v `nodejs` je v 
+[github repozitáři](https://github.com/zdebra/jenkinspipeline). Jenkins musí umět
+stáhnout a závislosti a pak spustit testy. K tomu bude potřeba 
+[nodejs plugin](https://wiki.jenkins-ci.org/display/JENKINS/NodeJS+Plugin). Dále 
+musí umět deploy na Heroku. K tomu je zapotřebí 
+[heroku plugin](https://wiki.jenkins-ci.org/display/JENKINS/Heroku+Plugin).
+
+### Jenkinsfile
+```
+node {
+    stage('Pulling the repo') {
+        git url: "https://github.com/zdebra/jenkinspipeline.git"
+    }
+    stage('Installing dependencies') {
+        sh "npm i"
+    }
+    stage('Test') {
+        sh "npm test"
+    }
+    stage('Deploy') {
+        sh script: "./deploy.sh"
+    }
+}
+```
+Úkazková pipeline se skládá ze 4 kroků: stáhnutí zdrojových kódů z repozitáře, 
+nainstalování závislostí, spuštění testů, nasazení.
+
+### Výsledek
+Jenkins přehledně zobrazí výsledky každého buildu.
+
+![Úspěšný build](img/pipeline_success.png "Úspěšný build")  
+
+![Chyba v testech](img/pipeline_error.png "Chyba v testech")  
+
+## Závěr
+Jenkins je hodně nápomocný při tvorbě software. Postará se o repetetivní úkony,
+umí monitorovat, odesílat notifikace a mnohé další. Nepodařilo se mi rozběhnout,
+aby se build spustil jako github webhook trigger. Předpokládám, že šlo o špatnou
+konfiguraci Jenkinse běžícího na localhostu. Jako nedostatek vidím to, že protože
+jsem používal nodejs, který není Jenkinsem v základu podprován, tak se výsledky
+testů nezobrazují v záložce testů. Tohle například konkurence v podobě _CircleCI_ 
+umí.
+
