@@ -1,0 +1,17 @@
+{
+  "name": "jenkins_node",
+  "version": "1.0.0",
+  "description": "testing jenkins pipeline with github hook and deploy to heroku",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.0"
+  },
+  "devDependencies": {
+    "mocha": "^3.2.0"
+  }
+}
