@@ -47,19 +47,13 @@ se tedy o omezení scope pro definované proměnné. Následují tři `stage`, t
 jednotlivé po sobě jdoucí kroky v pipeline. Jenkins nabízí širokou škálu příkazů
 (nazývané steps), které lze nalézt v [dokumentaci](https://jenkins.io/doc/pipeline/steps/).
 
-![Základní pohled na pipeline nabízí přehled historie buildů](img/pipeline_history.png "Pipeline historie")
-
 Konfigurační soubor lze uchovávat přímo v repozitáři a Jenkins na něj odkázat, nebo
 jej vepsat přímo v grafickém rozhraní v nastavení pipeline. 
-
-![Nastavení pipeline](img/settings_general.png "Nastavení pipeline")
 
 V nastavení pipeline jdou dále specifikovat tzv. _Build Triggers_, tedy události, kdy se
 má pipeline spouštět. Lze nastavit, že se pipeline bude provádět s nějakou periodicitou,
 nebo například Github webhook (Jenkins pozná, že do určité větve v repozitáři byl 
 pushnut nový commit).
-
-![Pipeline triggery](img/settings_triggers.png "Pipeline triggers")
 
 ## Ukázková pipeline
 
@@ -91,11 +85,8 @@ node {
 nainstalování závislostí, spuštění testů, nasazení.
 
 ### Výsledek
-Jenkins přehledně zobrazí výsledky každého buildu.
-
-![Úspěšný build](img/pipeline_success.png "Úspěšný build")  
-
-![Chyba v testech](img/pipeline_error.png "Chyba v testech")  
+Jenkins přehledně zobrazí výsledky každého buildu. Dozvíte se, jak dlouho build trval, 
+kdy proběhl, lze sledovat detaily jednotlivých stage.
 
 ## Závěr
 Jenkins je hodně nápomocný při tvorbě software. Postará se o repetetivní úkony,
@@ -106,3 +97,12 @@ jsem používal nodejs, který není Jenkinsem v základu podprován, tak se vý
 testů nezobrazují v záložce testů. Tohle například konkurence v podobě _CircleCI_ 
 umí.
 
+![Úspěšný build](img/pipeline_success.png "Úspěšný build")   
+
+![Chyba v testech](img/pipeline_error.png "Chyba v testech")
+  
+![Pipeline triggery](img/settings_triggers.png "Pipeline triggers")
+
+![Základní pohled na pipeline nabízí přehled historie buildů](img/pipeline_history.png "Pipeline historie")\  
+
+![Nastavení pipeline](img/settings_general.png "Nastavení pipeline")
