@@ -10,7 +10,6 @@ node {
         sh "npm test"
     }
     stage('Deploy') {
-        sh "heroku auth:token"
         sh script: "./deploy.sh"
     }
 }
