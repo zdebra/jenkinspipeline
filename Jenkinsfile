@@ -11,6 +11,6 @@ node {
     }
     stage('Deploy') {
         sh "heroku auth:token"
-        sh "./deploy.sh"
+        sh script: "./deploy.sh"
     }
 }
