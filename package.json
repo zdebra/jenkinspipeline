@@ -1,7 +1,7 @@
 {
   "name": "jenkins_node",
   "version": "1.0.0",
-  "description": "testing jenkins pipeline with github hook and deploy to heroku",
+  "description": "testing jenkins pipeline with github hook and deploy to heroku.",
   "main": "index.js",
   "repository": "https://github.com/zdebra/jenkinspipeline",
   "scripts": {
