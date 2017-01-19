@@ -1,4 +1,3 @@
-
 node {
     stage('Pulling the repo') {
         git url: "https://github.com/zdebra/jenkinspipeline.git"
